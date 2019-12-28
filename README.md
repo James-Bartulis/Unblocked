@@ -42,6 +42,8 @@
     * q : cycle pieces backwards
     * e : cycle pieces forwards
     * C : quits game
+2. **Objective**:
+    * Move the 'a' piece through the opening on the right
     
     
 # How to edit :
@@ -66,3 +68,8 @@
     * \- : deletes block sharing a location with the cursor
     * | : save changes
     * _ : delete current map
+
+* missing things
+    - add objective
+    - fix code help 'w,a,s,d'
+

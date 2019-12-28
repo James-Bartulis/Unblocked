@@ -39,14 +39,9 @@ public:
 	void MoveDown();
 	void MoveRight();
 
-	// void MoveUp(Block* B);
-	// void MoveLeft(Block* B);
-	// void MoveDown(Block* B);
-	// void MoveRight(Block* B);
-
 	bool isGameRunning();
 	void Edit();
-	bool inBoundsOfMap(int x, int y, int width, int height);
+	bool inBoundsOfMap(int x, int y, int width = 1, int height = 1);
 	bool canMoveTo(int x, int y);
 	void saveMaps();
 	void deleteBlock();

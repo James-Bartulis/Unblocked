@@ -56,7 +56,6 @@ void Game::Display(){
 
 	bool nothing = true;
 
-
 	for(int i = 0; i < Width + 2; i++)
 		cout << char(178);
 	if(Solved[currentMap])
@@ -86,7 +85,7 @@ void Game::Display(){
 				if(nothing)
 					cout << " ";
 			}
-			if(j == Height - 1 && i != 2)
+			if(j == Height - 1 && i != (Height -1) / 2)
 				cout << char(178);
 		}
 		cout << endl;
@@ -113,23 +112,31 @@ void Game::CycleRight()
 
 void Game::MoveUp()
 {
-	if(canMoveTo(Maps[currentMap]->Blocks[currentBlock]->posX,Maps[currentMap]->Blocks[currentBlock]->posY - 1))
-		Maps[currentMap]->Blocks[currentBlock]->MoveUp();
+	Block *temp = Maps[currentMap]->Blocks[currentBlock];
+	int x = temp->posX, y = temp->posY;
+	if(canMoveTo(x, y - 1) && inBoundsOfMap(x, y - 1))
+		temp->MoveUp();
 }
 void Game::MoveLeft()
 {
-	if(canMoveTo(Maps[currentMap]->Blocks[currentBlock]->posX - 1,Maps[currentMap]->Blocks[currentBlock]->posY))
-		Maps[currentMap]->Blocks[currentBlock]->MoveLeft();
+	Block *temp = Maps[currentMap]->Blocks[currentBlock];
+	int x = temp->posX, y = temp->posY;
+	if(canMoveTo(x - 1, y) && inBoundsOfMap(x - 1, y))
+		temp->MoveLeft();
 }
 void Game::MoveDown()
 {
-	if(canMoveTo(Maps[currentMap]->Blocks[currentBlock]->posX,Maps[currentMap]->Blocks[currentBlock]->posY + Maps[currentMap]->Blocks[currentBlock]->height))
-		Maps[currentMap]->Blocks[currentBlock]->MoveDown();
+	Block *temp = Maps[currentMap]->Blocks[currentBlock];
+	int x = temp->posX, y = temp->posY, height = temp->height;
+	if(canMoveTo(x, y + temp->height) && inBoundsOfMap(x, y + height))
+		temp->MoveDown();
 }
 void Game::MoveRight()
 {
-	if(canMoveTo(Maps[currentMap]->Blocks[currentBlock]->posX + Maps[currentMap]->Blocks[currentBlock]->width,Maps[currentMap]->Blocks[currentBlock]->posY))
-		Maps[currentMap]->Blocks[currentBlock]->MoveRight();
+	Block *temp = Maps[currentMap]->Blocks[currentBlock];
+	int x = temp->posX, y = temp->posY, width = temp->width;
+	if(canMoveTo(x + temp->width, y) && inBoundsOfMap(x + width, y))
+		temp->MoveRight();
 }
 
 void Game::Input(){
@@ -382,8 +389,8 @@ void Game::Help(){
 	cout << "\tHorizontal pieces\n\t\tMove : left or right" << endl;
 	cout << "\tVertical pieces\n\t\tMove : up or down" << endl;
 	cout << "\tw : UP" << endl;
-	cout << "\ta : DOWN" << endl;
-	cout << "\ts : LEFT" << endl;
+	cout << "\ts : DOWN" << endl;
+	cout << "\ta : LEFT" << endl;
 	cout << "\td : RIGHT" << endl;
 	cout << "\t. : pick piece to control _\n\t\t(a-z, if exisits)" << endl;
 	cout << "\t[ : previous map" << endl;
@@ -400,8 +407,8 @@ void Game::Help(){
 	cout << endl;
 	cout << "Once in editing mode:" << endl;
 	cout << "\tw : UP" << endl;
-	cout << "\ta : DOWN" << endl;
-	cout << "\ts : LEFT" << endl;
+	cout << "\ts : DOWN" << endl;
+	cout << "\ta : LEFT" << endl;
 	cout << "\td : RIGHT" << endl;
 	cout << endl;
 	cout << "\t(1-4) will generate a new piece with given dimensions\n\toriginating from the cursor to the right or below the cursor" << endl;
