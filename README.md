@@ -68,8 +68,3 @@
     * \- : deletes block sharing a location with the cursor
     * | : save changes
     * _ : delete current map
-
-* missing things
-    - add objective
-    - fix code help 'w,a,s,d'
-
