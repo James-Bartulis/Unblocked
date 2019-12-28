@@ -32,8 +32,8 @@
     * Horizontal pieces Move : left or right
     * Vertical pieces Move : up or down
         - w : UP
-        - a : DOWN
-        - s : LEFT
+        - s : DOWN
+        - a : LEFT
         - d : RIGHT
     * . : pick piece to control _(a-z, if exisits)
     * [ : previous map
@@ -52,8 +52,8 @@
 # Once in editing mode:
 1. **Movement**
     * w : UP
-    * a : DOWN
-    * s : LEFT
+    * s : DOWN
+    * a : LEFT
     * d : RIGHT
 2. **Edits**
     * (1-4) will generate a new piece with given dimensions originating from the cursor to the right or below the cursor
