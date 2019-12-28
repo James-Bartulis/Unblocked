@@ -55,6 +55,7 @@ void Game::Display(){
 	system("CLS");
 
 	bool nothing = true;
+	Block *block;
 
 	for(int i = 0; i < Width + 2; i++)
 		cout << char(178);
@@ -71,9 +72,10 @@ void Game::Display(){
 			else{
 				nothing = true;
 				for(int k = 0; k < Maps[currentMap]->Blocks.size(); k++){
-					if(Maps[currentMap]->Blocks[k]->posX <= j && Maps[currentMap]->Blocks[k]->posY <= i &&
-						Maps[currentMap]->Blocks[k]->posX + Maps[currentMap]->Blocks[k]->width > j &&
-						Maps[currentMap]->Blocks[k]->posY + Maps[currentMap]->Blocks[k]->height > i
+					block = Maps[currentMap]->Blocks[k];
+					if(block->posX <= j && block->posY <= i &&
+						block->posX + block->width > j &&
+						block->posY + block->height > i
 						){
 						if(currentBlock == k)
 							cout << char(65 + k);
@@ -135,7 +137,7 @@ void Game::MoveRight()
 {
 	Block *temp = Maps[currentMap]->Blocks[currentBlock];
 	int x = temp->posX, y = temp->posY, width = temp->width;
-	if(canMoveTo(x + temp->width, y) && inBoundsOfMap(x + width, y))
+	if(canMoveTo(x + temp->width, y) && inBoundsOfMap(x + width, y) || canMoveTo(Width, (Height - 1) / 2))
 		temp->MoveRight();
 }
 
@@ -203,6 +205,8 @@ void Game::Input(){
 void Game::Logic(){
 	if(!canMoveTo(Width, (Height - 1) / 2)){ ///checks if you beat the map
 		int nextToBeSolved;
+		Solved[currentMap] = true;
+		reloadCurrentMap();
 		Win = true;
 		for(int i = 0; i < Solved.size(); i++){
 			if(Solved[i] == false){
@@ -215,9 +219,8 @@ void Game::Logic(){
 			gameRunning = false;
 			cout << endl << "You won!\nPress c to Continue";
 			while(getch() != 'c'){}
+			return;
 		}
-		Solved[currentMap] = true;
-		reloadCurrentMap();
 		if(currentMap < Maps.size() - 1)
 			currentMap++;
 		else
